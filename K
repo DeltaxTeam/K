@@ -1,0 +1,75 @@
+local Player = game.Players.LocalPlayer
+local Mouse = Player:GetMouse()
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local AimbotButton = Instance.new("TextButton")
+local EspButton = Instance.new("TextButton")
+local CoinInput = Instance.new("TextBox")
+local CoinLabel = Instance.new("TextLabel")
+local GodModeCheckbox = Instance.new("Checkbox")
+
+ScreenGui.Parent = Player.PlayerGui
+Frame.Parent = ScreenGui
+Frame.Position = UDim2.new(0.5, -100, 0.5, -100)
+Frame.Size = UDim2.new(0, 200, 0, 200)
+Frame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+
+AimbotButton.Parent = Frame
+AimbotButton.Position = UDim2.new(0.1, 0, 0.2, 0)
+AimbotButton.Size = UDim2.new(0.8, 0, 0.1, 0)
+AimbotButton.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+AimbotButton.Text = "Aimbot"
+
+local AimbotClickDetector = Instance.new("ClickDetector")
+AimbotClickDetector.Parent = AimbotButton
+AimbotClickDetector.MouseClick:Connect(function()
+    local Aimbot = function()
+        local Target = game.Workspace:FindPartOnRayWithIgnoreList(Mouse.Ray, Player.Character)
+        if Target then
+            Mouse.Target = Target
+        end
+    end
+    Aimbot()
+end)
+
+EspButton.Parent = Frame
+EspButton.Position = UDim2.new(0.1, 0, 0.4, 0)
+EspButton.Size = UDim2.new(0.8, 0, 0.1, 0)
+EspButton.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+EspButton.Text = "ESP"
+
+local ESPClickDetector = Instance.new("ClickDetector")
+ESPClickDetector.Parent = EspButton
+ESPClickDetector.MouseClick:Connect(function()
+    local ESP = function()
+        for i, v in ipairs(game.Players:GetPlayers()) do
+            if v ~= Player then
+                if v.Character then
+                    local Name = v.Name
+                    local Head = v.Character.Head
+                    local Box = Instance.new("BoxSelection")
+                    Box.Parent = Head
+                    Box.Adornee = Head
+                    Box.Color3 = Color3.new(1, 0, 0)
+                    Box.Name = "ESPBox"
+                end
+            end
+        end
+    end
+    ESP()
+end)
+
+CoinInput.Parent = Frame
+CoinInput.Position = UDim2.new(0.1, 0, 0.6, 0)
+CoinInput.Size = UDim2.new(0.8, 0, 0.1, 0)
+CoinInput.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+CoinInput.Text = "0"
+
+CoinLabel.Parent = Frame
+CoinLabel.Position = UDim2.new(0.1, 0, 0.7, 0)
+CoinLabel.Size = UDim2.new(0.8, 0, 0.1, 0)
+CoinLabel.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+CoinLabel.Text = "Coins: 0"
+
+GodModeCheckbox.Parent = Frame
